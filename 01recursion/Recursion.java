@@ -1,0 +1,19 @@
+public class Recursion{
+    public String name(){
+	return "Topa,Giovanni";
+    }
+    public double sqrt(double n){
+	if (n<0){
+	    throw new IllegalArgumentException();
+	}else{
+	    return sqrt(n,1);
+	}
+    }
+    public double sqrt (double n, double guess){
+	if (guess*guess/n<.00001){
+	    return guess;
+	}else{
+	    return sqrt(n,(n/guess+guess)/2);
+	}
+    }
+}
