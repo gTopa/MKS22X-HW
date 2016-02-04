@@ -10,7 +10,7 @@ public class Recursion implements hw01{
 	}
     }
     public double sqrt (double n, double guess){
-	if (guess*guess/n<.00001){
+	if (guess*guess/n<1.00000001&&guess*guess/n>.99999999){
 	    return guess;
 	}else{
 	    return sqrt(n,(n/guess+guess)/2);
