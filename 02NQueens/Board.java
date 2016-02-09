@@ -43,5 +43,15 @@ public class Board{
 	    }
 	}
     }
+    public String toString(){
+	String thing="";
+	for (int row=0;row<board.length;row++){
+	    for (int col=0;col<board.length;col++){
+		thing+=board[row][col]+" ";
+	    }
+	    thing+="\n";
+	}
+	return thing;
+    }
 }
 	
