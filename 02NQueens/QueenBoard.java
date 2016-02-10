@@ -23,6 +23,7 @@ public class QueenBoard{
      */
     private boolean solveH(int col){
 	if(col==board.length){
+	    printSolution();
 	    return true;
 	}
 	int row=0;
@@ -36,6 +37,9 @@ public class QueenBoard{
 	    }
 	    row++;
 	}
+	if(col==0){
+	    printSolution();
+	}
 	return false;
     }
     
@@ -44,9 +48,9 @@ public class QueenBoard{
 	for(int r = 0; r < board.length; r++){
 	    for(int c = 0; c < board[0].length; c++){
 		if (board[r][c]>0){
-			ans+= "Q\t";
+			ans+= "Q ";
 		}else{
-		    ans+="_\t";
+		    ans+="_ ";
 		}
 	    }
 	    ans+="\n";
@@ -98,7 +102,7 @@ public class QueenBoard{
 	String ans = "";
 	for(int r = 0; r < board.length; r++){
 	    for(int c = 0; c < board[0].length; c++){
-		ans+= board[r][c]+"\t";
+		ans+= board[r][c]+" ";
 	    }
 	    ans+="\n";
 	}
@@ -106,10 +110,8 @@ public class QueenBoard{
     }
     
     public static void main(String[]args){
-	QueenBoard b = new QueenBoard(5);
-        System.out.println(b);
+	QueenBoard b = new QueenBoard(7);
 	System.out.println(b.solve());
-        System.out.println(b);
     }
     
     
