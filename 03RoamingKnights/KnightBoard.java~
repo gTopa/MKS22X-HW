@@ -17,9 +17,11 @@ public class KnightBoard{
 
     public boolean solveH(int row, int col, int turn){
 	if (turn==(board.length-4)*(board[0].length-4)){
-	    return moveKnight(turn,row,col);
+	    if(moveKnight(row,col,turn)){
+		return true;
+	    }
 	}else{
-	    if(moveKnight(turn,row,col)){
+	    if(moveKnight(row,col,turn)){
 		if(solveH(row + 2,col+1,turn+1) ||
 		   solveH(row + 2,col-1,turn+1) ||
 		   solveH(row - 2,col+1,turn+1) ||
@@ -29,9 +31,9 @@ public class KnightBoard{
 		   solveH(row - 1,col+2,turn+1) ||
 		   solveH(row - 1,col+2,turn+1)){
 		    return true;
-		}else{
-		    removeKnight(row,col);
 		}
+	    }else{
+		removeKnight(row,col);
 	    }
 	}
 	return false;
@@ -42,16 +44,8 @@ public class KnightBoard{
 	int colL=board[0].length;
 	for (int row=0;row<rowL;row++){
 	    for(int col=0;col<colL;col++){
-		if (board[row][col]>=0){
-		    if(rowL*colL>10){
-			if (board[row][col]/10>0){
-			    System.out.print(board[row][col]+" ");
-			}else{
-			    System.out.print(" "+board[row][col]+" ");
-			}
-		    }else{
-			System.out.print(board[row][col]+" ");
-		    }
+		if (board[row][col]>0){
+		    System.out.print(board[row][col]);
 		}
 	    }
 	    System.out.println();
@@ -84,9 +78,9 @@ public class KnightBoard{
 	    System.out.println();
 	}
     }
-    
+
     public static void main(String[]args){
-	KnightBoard b1=new KnightBoard(7,8);
+	KnightBoard b1=new KnightBoard(5,7);
 	System.out.println(b1.solve());
 	b1.printBoard();
 	b1.printSolution();
