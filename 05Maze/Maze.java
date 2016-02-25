@@ -25,6 +25,7 @@ public class Maze{
 	    while(in.hasNextLine()){
 		rows.add(in.nextLine());
 	    }
+	    rows.remove(rows.size()-1);
 	    int r=rows.size();
 	    int c=rows.get(0).length();
 	    maze=new char[r][c];
@@ -77,9 +78,23 @@ public class Maze{
             System.out.println(this);
             wait(20);
         }
-
-        //COMPLETE SOLVE
-        return false; //so it compiles
+	if (maze[x][y]=='E'){
+	    return true;
+	}
+	
+	if (placeMarker(int x,int y)){
+	    //COMPLETE SOLVE
+	    if(solve(x+1,y+1)||
+	       solve(x+1,y-1)||
+	       solve(x-1,y+1)||
+	       solve(x-1,y-1)){
+		return true;
+	    }else{
+		maze[x][y]=' ';
+		return false;
+	    }
+	}
+	return false;
     }
 
 
