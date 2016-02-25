@@ -29,10 +29,8 @@ public class Maze{
 	    int c=rows.get(0).length();
 	    maze=new char[r][c];
 	    for(int i=0;i<r;i++){
-		Scanner col=new Scanner(rows.get(i));
-		col.useDelimiter("");
 		for(int j=0;j<c;j++){
-		    maze[i][j]=col.next().charAt(0);
+		    maze[i][j]=rows.get(i).charAt(j);
 		    if (maze[i][j]=='S'){
 			starty=i;
 			starty=j;
