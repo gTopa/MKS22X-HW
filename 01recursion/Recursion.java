@@ -5,6 +5,8 @@ public class Recursion implements hw01{
     public double sqrt(double n){
 	if (n<0){
 	    throw new IllegalArgumentException();
+	}else if(n==0){
+	    return 0;
 	}else{
 	    return sqrt(n,1);
 	}
