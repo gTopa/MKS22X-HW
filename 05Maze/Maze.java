@@ -20,20 +20,20 @@ public class Maze{
     */
     public Maze(String filename, boolean ani){
         try{
+	    animate=ani;
 	    Scanner in = new Scanner(new File(filename));
 	    ArrayList<String> rows=new ArrayList<String>();
 	    while(in.hasNextLine()){
 		rows.add(in.nextLine());
 	    }
-	    rows.remove(rows.size()-1);
-	    int r=rows.size();
 	    int c=rows.get(0).length();
+	    int r=rows.size();
 	    maze=new char[r][c];
 	    for(int i=0;i<r;i++){
 		for(int j=0;j<c;j++){
 		    maze[i][j]=rows.get(i).charAt(j);
 		    if (maze[i][j]=='S'){
-			starty=i;
+			startx=i;
 			starty=j;
 		    }
 		}
@@ -82,21 +82,29 @@ public class Maze{
 	    return true;
 	}
 	
-	if (placeMarker(int x,int y)){
+	if (placeMarker(x,y)){
 	    //COMPLETE SOLVE
-	    if(solve(x+1,y+1)||
-	       solve(x+1,y-1)||
-	       solve(x-1,y+1)||
-	       solve(x-1,y-1)){
+	    if(solve(x+1,y)||
+	       solve(x-1,y)||
+	       solve(x,y+1)||
+	       solve(x,y-1)){
 		return true;
 	    }else{
-		maze[x][y]=' ';
+		maze[x][y]='.';
 		return false;
 	    }
 	}
 	return false;
     }
 
+    public boolean placeMarker(int x, int y){
+	if (maze[x][y]==' '){
+	    maze[x][y]='@';
+	    return true;
+	}else{
+	    return false;
+	}
+    }
 
     //FREE STUFF!!! *you should be aware of this*
 
