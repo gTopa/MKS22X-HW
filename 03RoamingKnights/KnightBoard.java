@@ -84,11 +84,4 @@ public class KnightBoard{
 	    System.out.println();
 	}
     }
-    
-    public static void main(String[]args){
-	KnightBoard b1=new KnightBoard(7,8);
-	System.out.println(b1.solve());
-	b1.printBoard();
-	b1.printSolution();
-    }
 }

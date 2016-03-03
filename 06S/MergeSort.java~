@@ -1,0 +1,27 @@
+public class MergeSort{
+    
+    public static int[] merge(int[] data, int startA, int endA, int startB, int endB){
+	int[] dataMerged=new int[endB-startA+1];
+	int c=0;
+	while(startA<=endA&&startB<=endB){
+	    if(data[startA]>data[startB]){
+		dataMerged[c]=data[startB];
+		c++;
+		startB++;
+	    }else{
+		dataMerged[c]=data[startA];
+		c++;
+		startA++;
+	    }
+	}
+	while(c<dataMerged.length){
+	    if (startA>endA){
+		dataMerged[c]=data[startB];
+		c++;
+		startB++;
+	    }else{
+		dataMerged[c]=data[startA];
+		c++;
+		startA++;
+	    }
+	}
