@@ -1,6 +1,7 @@
 public class Driver{
     public static void main(String[]args){
-	int[] a={4,5,6,1,2,3};
-	MergeSort.merge(a,0,2,3,5);
-	printArray(a);
+	int[] a={2,1,4,3};
+	MergeSort.mergeSort(a);
+	MergeSort.printArray(a);
     }
+}
