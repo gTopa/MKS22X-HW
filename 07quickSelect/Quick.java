@@ -21,5 +21,7 @@ public class Quick{
 	    return left+1;
 	}
     }
+    public static int qsH(int[] data,int k,int left,int right){
+    }
 }
 	
