@@ -70,4 +70,7 @@ public class MergeSort{
 	}
 	System.out.println();
     }
+    public static String name(){
+	return "7,Topa,Giovanni";  
+    }
 }
