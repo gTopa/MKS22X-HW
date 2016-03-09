@@ -1,5 +1,8 @@
 public class Quick{
     public static int partition(int[] data,int left, int right){
+	if (left==right){
+	    return left;
+	}
 	int pos=(int)(Math.random()*(right-left+1))+left;
 	int num=data[pos];
 	int end=right;
@@ -32,8 +35,8 @@ public class Quick{
     }
     
     public static int quickselect(int[] data,int k,int left,int right){
-	printArray(data);
 	int pos=partition(data,left,right);
+	printArray(data);
 	System.out.println(pos);
 	if(pos==k){
 	    return data[k];
