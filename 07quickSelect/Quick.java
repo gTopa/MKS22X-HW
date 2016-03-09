@@ -1,9 +1,10 @@
 public class Quick{
     public static int partition(int[] data,int left, int right){
-	int pos=(int)(Math.random()*data.length);
+	int pos=(int)(Math.random()*(right-left+1))+left;
 	int num=data[pos];
-	data[pos]=data[data.length-1];
-	data[data.length-1]=num;
+	int end=right;
+	data[pos]=data[right];
+	data[right]=num;
 	right--;
 	while(left!=right){
 	    if(data[left]<=num){
@@ -16,12 +17,12 @@ public class Quick{
 	    }
 	}
 	if(data[left]>num){
-	    data[data.length-1]=data[right];
+	    data[end]=data[right];
 	    data[right]=num;
 	    return left;
 	}else{
-	    data[data.length-1]=data[right+1];
-	    data[right+1]=num;
+	    data[end]=data[left+1];
+	    data[left+1]=num;
 	    return left+1;
 	}
     }
