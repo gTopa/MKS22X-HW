@@ -14,7 +14,7 @@ public class Silver{
 	    for(int row=0;row<N;row++){
 		rows[row]=in.nextLine();
 	    }
-	    for(int n=0;n<rows.length;n++){
+	    for(int n=0;n<rows.length-1;n++){
 		for (int m=0;m<M;m++){
 		    if (rows[n].charAt(m)=='*'){
 			pasture[n][m]=-1;
@@ -35,13 +35,14 @@ public class Silver{
     }
 
     public static int[][] solve(int[][] pasture, int moves){
+	printArray(pasture);
 	if (moves==0){
 	    return pasture;
 	}else{
 	    int[][] pasture1=new int[pasture.length][pasture[0].length];
 	    for(int i=0;i<pasture.length*pasture[0].length;i++){
-		if(pasture[i/pasture.length][i%pasture[0].length]!=-1){
-		    pasture1[i/pasture.length][i%pasture[0].length]=sumNeighbors(pasture,i/pasture.length,i%pasture[0].length);
+		if(pasture[i/pasture.length][i%pasture.length]!=-1){
+		    pasture1[i/pasture.length][i%pasture[0].length]=sumNeighbors(pasture,i/pasture.length,i%pasture.length);
 		}else{
 		    pasture1[i/pasture1.length][i%pasture1[0].length]=-1;
 		}
@@ -55,7 +56,7 @@ public class Silver{
     }
 
     public static int sum(int[][]pasture, int row, int col){
-	if(row>=0&&col>=0&&row<pasture.length&&col<pasture[0].length&&pasture[row][col]!=-1){
+	if(row>=0&&col>=0&&row<pasture.length&&col<pasture.length&&pasture[row][col]!=-1){
 	    return pasture[row][col];
 	}else{
 	    return 0;
@@ -64,7 +65,7 @@ public class Silver{
     public static void printArray(int[][] data){
 	for(int j=0;j<data.length;j++){
 	    for (int i=0;i<data[0].length;i++){
-		System.out.print(data[j][i]+" ");
+		System.out.print(data[j][i]);
 	    }
 	    System.out.println();
 	}
