@@ -44,7 +44,18 @@ public class Quick{
 	    return quickselect(data,k,pos+1,right);
 	}	    
     }
-    
+
+    public static void quickSort(int[] data){
+	quickSort(data,0,data.length-1);
+    }
+
+    public static void quickSort(int[] data, int left, int right){
+	if(right-left>0){
+	    int pos=partition(data,left,right);
+	    quickSort(data,left,pos-1);
+	    quickSort(data,pos+1,right);
+	}
+    }
     public static void printArray(int[] data){
 	for (int i=0;i<data.length;i++){
 	    System.out.print(data[i]+" ");
