@@ -36,8 +36,6 @@ public class Quick{
     
     public static int quickselect(int[] data,int k,int left,int right){
 	int pos=partition(data,left,right);
-	printArray(data);
-	System.out.println(pos);
 	if(pos==k){
 	    return data[k];
 	}else if(pos>k){

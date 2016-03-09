@@ -1,6 +1,14 @@
 public class Quick{
     public static int partition(int[] data,int left, int right){
-	int num=data[Math.Random()*data.length];
+	if (left==right){
+	    return left;
+	}
+	int pos=(int)(Math.random()*(right-left+1))+left;
+	int num=data[pos];
+	int end=right;
+	data[pos]=data[right];
+	data[right]=num;
+	right--;
 	while(left!=right){
 	    if(data[left]<=num){
 		left++;
@@ -12,12 +20,12 @@ public class Quick{
 	    }
 	}
 	if(data[left]>num){
-	    data[data.length-1]=data[right];
+	    data[end]=data[right];
 	    data[right]=num;
 	    return left;
 	}else{
-	    data[data.length-1]=data[right+1];
-	    data[right+1]=num;
+	    data[end]=data[left+1];
+	    data[left+1]=num;
 	    return left+1;
 	}
     }
@@ -28,13 +36,23 @@ public class Quick{
     
     public static int quickselect(int[] data,int k,int left,int right){
 	int pos=partition(data,left,right);
+	printArray(data);
+	System.out.println(pos);
 	if(pos==k){
 	    return data[k];
 	}else if(pos>k){
-	    quickselect(data,k,right,pos-1);
+	    return quickselect(data,k,left,pos-1);
 	}else{
-	    quickselect(data,k,pos+1,left);
+	    return quickselect(data,k,pos+1,right);
 	}	    
     }
+    
+    public static void printArray(int[] data){
+	for (int i=0;i<data.length;i++){
+	    System.out.print(data[i]+" ");
+	}
+	System.out.println();
+    }
+
 }
 	
