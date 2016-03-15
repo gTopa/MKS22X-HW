@@ -1,0 +1,21 @@
+public class MyLinkedList{
+    private int size;
+    private LNode start;
+    private class LNode{
+	private int value;
+	private LNode next;
+	
+	public LNode(int val){
+	    value=val;
+	}
+	public void setNext(LNode nxt){
+	    next=nxt;
+	}
+	public void setValue(int val){
+	    value=val;
+	}
+    }
+    public MyLinkedList(){
+	size=0;
+    }
+    
