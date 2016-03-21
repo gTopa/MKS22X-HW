@@ -1,9 +1,9 @@
-public class MyLinkedList{
+public class MyLinkedList<T>{
     private class LNode{
-	private int value;
+	private T value;
 	private LNode next;
 	
-	public LNode(int val){
+	public LNode(T val){
 	    value=val;
 	}
 	public void setNext(LNode nxt){
@@ -12,10 +12,10 @@ public class MyLinkedList{
 	public LNode getNext(){
 	    return next;
 	}
-	public void setValue(int val){
+	public void setValue(T val){
 	    value=val;
 	}
-	public int getValue(){
+	public T getValue(){
 	    return value;
 	}
     }
@@ -23,7 +23,7 @@ public class MyLinkedList{
     private LNode start;
     private LNode end;
     
-    public boolean add(int value){
+    public boolean add(T value){
 	if (start==null){
 	    start=new LNode(value);
 	    size++;
@@ -37,7 +37,7 @@ public class MyLinkedList{
 	}
     }
     
-    public boolean add(int value, int pos){
+    public boolean add(T value, int pos){
 	if(pos>size){
 	    return false;
 	}else if(pos==0){
@@ -79,7 +79,7 @@ public class MyLinkedList{
 	}
     }
 
-    public int get(int pos){
+    public T get(int pos){
 	if(pos>=size){
 	    System.out.println("Index out of Bounds");
 	}
@@ -90,7 +90,7 @@ public class MyLinkedList{
 	return current.getValue();
     }
 
-    public int set(int value, int pos){
+    public T set(T value, int pos){
 	if(pos>=size){
 	    System.out.println("Index out of Bounds");
 	}
@@ -98,7 +98,7 @@ public class MyLinkedList{
 	for (int i=0;i<pos;i++){
 	    current=current.getNext();
 	}
-	int temp=current.getValue();
+	T temp=current.getValue();
 	current.setValue(value);
 	return temp;
     }
@@ -107,11 +107,11 @@ public class MyLinkedList{
 	return size;
     }
 
-    public int indexOf(int value){
+    public int indexOf(T value){
 	int pos=0;
 	LNode current=start;
 	while(current.getNext()!=null){
-	    if (current.getValue()==value){
+	    if (current.getValue().equals(value)){
 		return pos;
 	    }
 	    current=current.getNext();
@@ -133,19 +133,5 @@ public class MyLinkedList{
     }
 
     public static void main(String[]args){
-	MyLinkedList l=new MyLinkedList();
-	l.add(3);
-	System.out.println(l);
-	l.add(-3,1);
-	System.out.println(l);
-	l.add(-3);
-	System.out.println(l);
-	l.remove(1);
-	System.out.println(l);
-	System.out.println(l.get(1));	
-	System.out.println(l.set(3,1));	
-	System.out.println(l);
-	System.out.println(l.indexOf(3));
-	System.out.println(l.indexOf(2));
     }
 }
