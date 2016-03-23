@@ -43,6 +43,7 @@ public class Driver{
         //replace toString(true) with a debug to string that shows the head/tail
         System.out.println(m.toString(true));
         System.out.println(n);
+	System.out.println(m.size());
 
         //test removing from head/tail/middle
         m.remove(0);
@@ -57,6 +58,7 @@ public class Driver{
         n.remove(n.size()-1);
         System.out.println(m.toString(true));
         System.out.println(n);
+	System.out.println(m.size());
 
         //test adding to end/start
         m.add(0,"START");
@@ -65,34 +67,40 @@ public class Driver{
         n.add(n.size(),"PENULTIMATE");
         System.out.println(m.toString(true));
         System.out.println(n);
+	System.out.println(m.size());
 
         //test add
         m.add("Z-END!");
         n.add("Z-END!");
         System.out.println(m.toString(true));
         System.out.println(n);
+	System.out.println(m.size());
+
+	MyLinkedList<String> a = new MyLinkedList<String>();
+        ArrayList<String>    b = new ArrayList<String>();
 
         //test remove random items:
         Random rand = new Random(0);
         for(int i = 0; i < 6000; i++){
             int op = rand.nextInt(4);
-
-            if(op == 0 || n.size()==0){//ensure never empty
-                n.add(""+i);
-                m.add(""+i);
+            if(op == 0 || a.size()==0){//ensure never empty
+                a.add(""+i);
+                b.add(""+i);
             }else if(op == 1 ){
-                int x = rand.nextInt(n.size());
-                n.add(x,""+i);
-                m.add(x,""+i);
+                int x = rand.nextInt(a.size());
+                a.add(x,""+i);
+                b.add(x,""+i);
             }else{
-                int x = rand.nextInt(n.size());
-                if(!n.remove(x).equals(m.remove(x))){
+                int x = rand.nextInt(a.size());
+                if(!a.remove(x).equals(b.remove(x))){
                     System.out.println("Non matching elements removed\n");
+		    System.out.println(a.toString(true));
+		    System.out.println(b);
                     System.exit(1);
                 }
             }
         }
-        //System.out.println(m.toString(true));
-        System.out.println(n);
+        System.out.println(a.toString(true));
+        System.out.println(b);
     }
 }

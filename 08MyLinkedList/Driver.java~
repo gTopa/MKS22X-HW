@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class Driver{
     public static void main(String[]args){
         MyLinkedList<String> m = new MyLinkedList<String>();
@@ -90,7 +92,7 @@ public class Driver{
                 }
             }
         }
-        System.out.println(m.toString(true));
+        //System.out.println(m.toString(true));
         System.out.println(n);
     }
 }

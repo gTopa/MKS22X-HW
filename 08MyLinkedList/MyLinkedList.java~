@@ -37,15 +37,16 @@ public class MyLinkedList<T>{
 	}
     }
     
-    public boolean add(T value, int pos){
-	if(pos>size){
-	    return false;
+    public boolean add(int pos, T value){
+	if(pos>size||pos<0){
+	    throw new IndexOutOfBoundsException();
 	}else if(pos==0){
 	    LNode current = start;
 	    start=new LNode(value);
 	    start.setNext(current);
-	    end=start;
 	    return true;
+	}else if(pos==size){
+	    return add(value);
 	}else{
 	    LNode current = start;
 	    for (int i=0;i<pos-1;i++){
@@ -63,10 +64,11 @@ public class MyLinkedList<T>{
     }
 
     public boolean remove(int pos){
-	if(pos>size){
-	    return false;
+	if(pos>=size||pos<0){
+	    throw new IndexOutOfBoundsException();
 	}else if(pos==0){
 	    start=start.getNext();
+	    size--;
 	    return true;
 	}else{
 	    LNode current = start;
@@ -74,13 +76,16 @@ public class MyLinkedList<T>{
 		current=current.getNext();
 	    }
 	    current.setNext(current.getNext().getNext());
+	    if(pos==size-1){
+		end=current;
+	    }
 	    size--;
 	    return true;
 	}
     }
 
     public T get(int pos){
-	if(pos>=size){
+	if(pos>=size||pos<0){
 	    System.out.println("Index out of Bounds");
 	}
 	LNode current=start;
@@ -90,9 +95,9 @@ public class MyLinkedList<T>{
 	return current.getValue();
     }
 
-    public T set(T value, int pos){
-	if(pos>=size){
-	    System.out.println("Index out of Bounds");
+    public T set(int pos, T value){
+	if(pos>=size||pos<0){
+	    throw new IndexOutOfBoundsException();
 	}
 	LNode current=start;
 	for (int i=0;i<pos;i++){
@@ -119,7 +124,7 @@ public class MyLinkedList<T>{
 	return -1;
     }
     
-    public String toString(){
+    public String toString(boolean debug){
 	String ans="[";
 	LNode current = start;
 	while(current!=null){
@@ -129,9 +134,11 @@ public class MyLinkedList<T>{
 	    }
 	    current=current.getNext();
 	}
-	return ans+"]";
-    }
-
-    public static void main(String[]args){
+	ans+="]";
+	if(debug){
+	    return ans+" HEAD: "+start.getValue()+" TAIL: "+end.getValue();
+	}else {
+	    return ans;
+	}
     }
 }
