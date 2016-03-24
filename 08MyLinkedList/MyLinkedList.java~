@@ -44,6 +44,7 @@ public class MyLinkedList<T>{
 	    LNode current = start;
 	    start=new LNode(value);
 	    start.setNext(current);
+	    size++;
 	    return true;
 	}else if(pos==size){
 	    return add(value);
@@ -63,24 +64,26 @@ public class MyLinkedList<T>{
 	}
     }
 
-    public boolean remove(int pos){
+    public T remove(int pos){
 	if(pos>=size||pos<0){
 	    throw new IndexOutOfBoundsException();
 	}else if(pos==0){
+	    T thing=start.getValue();
 	    start=start.getNext();
 	    size--;
-	    return true;
+	    return thing;
 	}else{
 	    LNode current = start;
 	    for (int i=0;i<pos-1;i++){
 		current=current.getNext();
 	    }
+	    T thing=current.getNext().getValue();
 	    current.setNext(current.getNext().getNext());
 	    if(pos==size-1){
 		end=current;
 	    }
 	    size--;
-	    return true;
+	    return thing;
 	}
     }
 
