@@ -102,5 +102,9 @@ public class Driver{
         }
         System.out.println(a.toString(true));
         System.out.println(b);
+	for(String e : m){
+	    System.out.println(e);
+	}
     }
+    
 }

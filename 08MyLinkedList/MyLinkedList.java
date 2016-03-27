@@ -1,6 +1,7 @@
 import java.util.*;
+import java.lang.*;
 
-public class MyLinkedList<T>{
+public class MyLinkedList<T> implements Iterable<T>{
     private class LNode{
 	private T value;
 	private LNode next;
@@ -29,9 +30,13 @@ public class MyLinkedList<T>{
 	}
 
 	public T next(){
-	    T thing=current.getValue();
-	    current=current.getNext();
-	    return thing;
+	    if(hasNext()){
+		T thing=current.getValue();
+		current=current.getNext();
+		return thing;
+	    }else{
+		throw new  NoSuchElementException();
+	    }
 	}
 
 	public void remove(){

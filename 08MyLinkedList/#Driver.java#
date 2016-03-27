@@ -1,4 +1,5 @@
 import java.util.*;
+import java.lang.*;
 
 public class Driver{
     public static void main(String[]args){
@@ -102,5 +103,9 @@ public class Driver{
         }
         System.out.println(a.toString(true));
         System.out.println(b);
+	for(String e : m){
+	    System.out.println(e);
+	}
     }
+    
 }
