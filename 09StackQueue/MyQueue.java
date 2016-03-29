@@ -2,7 +2,7 @@ public class MyQueue<T>{
 
     private MyLinkedList<T> l;
 
-    public MyStack<T>(){
+    public MyQueue(){
 	l=new MyLinkedList<T>();
     }
 

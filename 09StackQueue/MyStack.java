@@ -2,7 +2,7 @@ public class MyStack<T>{
 
     private MyLinkedList<T> l;
 
-    public MyStack<T>(){
+    public MyStack(){
 	l=new MyLinkedList<T>();
     }
     
@@ -10,7 +10,7 @@ public class MyStack<T>{
      * Adds the given item to the top of the stack.
      */
     public void push(T item){
-	l.add(0);
+	l.add(0, item);
     }
 
     /**
