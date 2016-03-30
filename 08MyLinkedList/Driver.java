@@ -94,17 +94,12 @@ public class Driver{
                 int x = rand.nextInt(a.size());
                 if(!a.remove(x).equals(b.remove(x))){
                     System.out.println("Non matching elements removed\n");
-		    System.out.println(a.toString(true));
-		    System.out.println(b);
-                    System.exit(1);
+		    System.exit(1);
                 }
             }
         }
         System.out.println(a.toString(true));
         System.out.println(b);
-	for(String e : m){
-	    System.out.println(e);
-	}
     }
     
 }
