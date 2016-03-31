@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class MyQueue<T>{
 
     private MyLinkedList<T> l;
@@ -56,13 +58,13 @@ public class MyQueue<T>{
         for(int i = 0; i < 6000; i++){
             int op = rand.nextInt(4);
             if(op == 0 || a.size()==0){//ensure never empty
-                a.push(""+i);
-                b.push(""+i);
+                a.enqueue(""+i);
+                b.add(""+i);
             }else if(op == 1 ){
-                a.push(""+i);
-                b.push(""+i);
+                a.enqueue(""+i);
+                b.add(""+i);
             }else{
-                if(!a.pop().equals(b.pop())){
+                if(!a.dequeue().equals(b.remove())){
                     System.out.println("Non matching elements removed\n");
 		    System.exit(1);
                 }

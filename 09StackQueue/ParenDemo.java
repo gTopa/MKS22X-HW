@@ -28,7 +28,11 @@ public class ParenDemo{
 		    }
 		}
 	    }
-	    return true;
+	    if(open.isEmpty()){
+		return true;
+	    }else{
+		return false;
+	    }
 	}catch(NoSuchElementException e){
 	    return false;
 	}
