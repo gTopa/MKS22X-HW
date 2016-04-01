@@ -1,0 +1,9 @@
+public class MyDeque{
+    private Object[] deque;
+    private int start;
+    private int end;
+    private int size;
+
+    private void grow(){
+	
+    }
