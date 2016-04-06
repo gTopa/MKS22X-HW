@@ -1,15 +1,17 @@
 public class MyDeque<T>{
-    private Object[] deque;
+    private T[] deque;
     private int start;
     private int end;
     private int size;
 
+    @SuppressWarnings("unchecked")
     public MyDeque(){
-	deque=new Object[10];
+	deque=(T[]) new Object[10];
     }
-
+    
+    @SuppressWarnings("unchecked")
     private void grow(){
-	Object[] temp=new Object[size*2];
+	T[] temp=(T[]) new Object[size*2];
 	for(int ctr=0;ctr<size;ctr++){
 	    temp[ctr]=deque[(ctr+start)%size];
 	}
@@ -18,31 +20,55 @@ public class MyDeque<T>{
     }
 
     public void addFirst(T value){
-	if (start-1<0){
-	    start=deque.length;
+	if (start==end){
+	    deque[start]=value;
+	    size++;
+	}else if(size==1){
+	    if (start-1<0){
+		start=deque.length;
+	    }
+	    start--;
+	    deque[start]=value;
+	    size++;
+	}else{
+	    if (start-1<0){
+		start=deque.length;
+	    }
+	    start--;
+	    if(start==end){
+		grow();
+	    }
+	    deque[start]=value;
+	    size++;
 	}
-	start--;
-	if(start==end){
-	    grow();
-	}
-	deque[start]=value;
-	size++;
     }
 
     public void addLast(T value){
-	if(end+1>=deque.length){
-	    end=-1;
-	}
-	end++;
 	if (start==end){
-	    grow();
+	    deque[start]=value;
+	    size++;
+	}else if(size==1){
+	    if(end+1>=deque.length){
+		end=-1;
+	    }
+	    end++;
+	    deque[end]=value;
+	    size++;
+	}else{
+	    if(end+1>=deque.length){
+		end=-1;
+	    }
+	    end++;
+	    if (start==end){
+		grow();
+	    }
+	    deque[end]=value;
+	    size++;
 	}
-	deque[end]=value;
-	size++;
     }
 
     public T removeFirst(){
-	T temp=(T)deque[start];
+	T temp=deque[start];
 	if(start+1>=deque.length){
 	    start=-1;
 	}
@@ -52,7 +78,7 @@ public class MyDeque<T>{
     }
 
     public T removeLast(){
-	T temp=(T)deque[end];
+	T temp=deque[end];
 	if (end-1<0){
 	    end=deque.length;
 	}
