@@ -2,7 +2,7 @@ public class MyDeque<T>{
     private T[] deque;
     private int start;
     private int end;
-    private int size;
+    public int size;
 
     @SuppressWarnings("unchecked")
     public MyDeque(){
@@ -88,11 +88,11 @@ public class MyDeque<T>{
     }
 
     public T getFirst(){
-	return (T)deque[start];
+	return deque[start];
     }
 
     public T getLast(){
-	return (T)deque[end];
+	return deque[end];
     }
 
     public String toString(){
