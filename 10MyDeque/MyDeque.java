@@ -2,7 +2,7 @@ public class MyDeque<T>{
     private T[] deque;
     private int start;
     private int end;
-    public int size;
+    private int size;
 
     @SuppressWarnings("unchecked")
     public MyDeque(){
@@ -18,16 +18,16 @@ public class MyDeque<T>{
 	start=0;
 	end=size-1;
     }
-
+    
     public void addFirst(T value){
-	if (start==end){
-	    deque[start]=value;
-	    size++;
-	}else if(size==1){
+	if(size==1){
 	    if (start-1<0){
 		start=deque.length;
 	    }
 	    start--;
+	    deque[start]=value;
+	    size++;
+	}else if (start==end){
 	    deque[start]=value;
 	    size++;
 	}else{
@@ -44,15 +44,15 @@ public class MyDeque<T>{
     }
 
     public void addLast(T value){
-	if (start==end){
-	    deque[start]=value;
-	    size++;
-	}else if(size==1){
+	if(size==1){
 	    if(end+1>=deque.length){
 		end=-1;
 	    }
 	    end++;
 	    deque[end]=value;
+	    size++;
+	}else if (start==end){
+	    deque[start]=value;
 	    size++;
 	}else{
 	    if(end+1>=deque.length){
