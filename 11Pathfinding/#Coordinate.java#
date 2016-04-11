@@ -1,0 +1,11 @@
+import java.util.*;
+
+public class Coordinate{
+    public ArrayList<int[]> getHistory(){
+	return history;
+    }
+
+    public void addToHistory(int newX, int newY){
+	history.add({newX, newY});
+    }
+}
