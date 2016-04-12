@@ -3,7 +3,26 @@ import java.io.*;
 
 public class BetterMaze{
     private class Node{
+	private int x;
+	private int y;
+	private Node prev;
 
+	public Node(int x, int y, Node prev){
+	    this.x=x;
+	    this.y=y;
+	    this.prev=prev;
+	}
+	
+	public int getX(){
+	    return x;
+	}
+	
+	public int getY(){
+	    return y;
+	}
+	public Node getPrev(){
+	    return prev;
+	}
     }
 
     private char[][] maze;
@@ -29,28 +48,66 @@ public class BetterMaze{
     /**initialize the frontier as a queue and call solve
     **/
     public boolean solveBFS(){  
-        /** IMPLEMENT THIS **/      
-	return false;
+	placesToGo=new FrontierStack<Node>();
+	return solve();
     }   
 
 
    /**initialize the frontier as a stack and call solve
     */ 
     public boolean solveDFS(){  
-        /** IMPLEMENT THIS **/  
-	return false;
+	placesToGo=new FrontierStack<Node>();
+	return solve();
     }    
 
    /**Search for the end of the maze using the frontier. 
       Keep going until you find a solution or run out of elements on the frontier.
     **/
     private boolean solve(){  
-        /** IMPLEMENT THIS **/  
+	placesToGo.add(new Node(startRow,startCol,null));
+	while(placesToGo.hasNext()){
+	    Node next=placesToGo.next();
+	    for(Node n : getNeighbors(next)){
+		if (checkEnd(n)){
+		    solutionCoordinates();
+		    return true;
+		}
+		startRow=n.getX();
+		startCol=n.getY();
+		maze[startRow][startCol]='.';
+		placesToGo.add(n);
+	    }
+	}
 	return false;
     }    
      
+    private boolean checkEnd(Node next){
+	return maze[next.getX()][next.getY()]=='E';
+    }
+
+    private ArrayList<Node> getNeighbors(Node next){
+	int row=next.getX();
+	int col=next.getY();
+	ArrayList<Node> neighbors=new ArrayList<Node>();
+	if(!(row-1<0||col-1<0||maze[row-1][col-1]=='.'||maze[row-1][col-1]=='#')){
+	    neighbors.add(new Node(row-1,col-1,next));
+	}
+	if(!(row+1>=maze.length||col-1<0||maze[row+1][col-1]=='.'||maze[row+1][col-1]=='#')){
+	    neighbors.add(new Node(row+1,col-1,next));
+	}
+	if(!(row-1<0||col+1>=maze[row].length||maze[row-1][col+1]=='.'||maze[row-1][col+1]=='#')){
+	    neighbors.add(new Node(row-1,col+1,next));
+	}
+	if(!(row+1>=maze.length||col+1>=maze[row].length||maze[row+1][col+1]=='.'||maze[row+1][col+1]=='#')){
+	    neighbors.add(new Node(row+1,col+1,next));
+	}
+	return neighbors;
+    }
+
    /**mutator for the animate variable  **/
-    public void setAnimate(boolean b){  /** IMPLEMENT THIS **/ }    
+    public void setAnimate(boolean b){ 
+	animate=b;
+    }    
 
 
     public BetterMaze(String filename){
@@ -146,12 +203,7 @@ public class BetterMaze{
 	}else{
 	    return ans + color(37,40) + "\n";
 	}
-    } 
-    
-
-
-       
-    
-    
-
+    }
+    public static void main(String[]args){
+	
 }
