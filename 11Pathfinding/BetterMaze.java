@@ -26,10 +26,10 @@ public class BetterMaze{
     }
 
     private char[][] maze;
-    private int[]    solution;
-    private int      startRow,startCol;
+    private ArrayList<Integer> solution;
+    private int startRow,startCol;
     private Frontier<Node> placesToGo;
-    private boolean  animate;//default to false
+    private boolean animate;//default to false
 
    /**return a COPY of solution.
      *This should be : [x1,y1,x2,y2,x3,y3...]
@@ -48,7 +48,7 @@ public class BetterMaze{
     /**initialize the frontier as a queue and call solve
     **/
     public boolean solveBFS(){  
-	placesToGo=new FrontierStack<Node>();
+	placesToGo=new FrontierQueue<Node>();
 	return solve();
     }   
 
@@ -64,18 +64,26 @@ public class BetterMaze{
       Keep going until you find a solution or run out of elements on the frontier.
     **/
     private boolean solve(){  
-	placesToGo.add(new Node(startRow,startCol,null));
+	Node next=new Node(startRow,startCol,null);
+	maze[next.getX()][next.getY()] = '.';
 	while(placesToGo.hasNext()){
-	    Node next=placesToGo.next();
 	    for(Node n : getNeighbors(next)){
-		if (checkEnd(n)){
-		    solutionCoordinates();
+		if(maze[n.getX()][n.getY()]=='E') {
+		    while(n.getPrev()!=null) {
+			maze[n.getX()][n.getY()] = '*';
+			solution.add(0,n.getY());
+			solution.add(0,n.getX());
+			n = n.getPrev();
+		    }
 		    return true;
 		}
-		startRow=n.getX();
-		startCol=n.getY();
-		maze[startRow][startCol]='.';
-		placesToGo.add(n);
+		else{
+		    maze[n.getX()][n.getY()] = '.';
+		    placesToGo.add(n);
+		}
+		if (animate){
+		    System.out.println(toString());
+		}
 	    }
 	}
 	return false;
@@ -89,17 +97,17 @@ public class BetterMaze{
 	int row=next.getX();
 	int col=next.getY();
 	ArrayList<Node> neighbors=new ArrayList<Node>();
-	if(!(row-1<0||col-1<0||maze[row-1][col-1]=='.'||maze[row-1][col-1]=='#')){
-	    neighbors.add(new Node(row-1,col-1,next));
+	if(maze[row-1][col]!='.'&&maze[row-1][col]!='#'){
+	    neighbors.add(new Node(row-1,col,next));
 	}
-	if(!(row+1>=maze.length||col-1<0||maze[row+1][col-1]=='.'||maze[row+1][col-1]=='#')){
-	    neighbors.add(new Node(row+1,col-1,next));
+	if(maze[row+1][col]=='.'&&maze[row+1][col]=='#'){
+	    neighbors.add(new Node(row+1,col,next));
 	}
-	if(!(row-1<0||col+1>=maze[row].length||maze[row-1][col+1]=='.'||maze[row-1][col+1]=='#')){
-	    neighbors.add(new Node(row-1,col+1,next));
+	if(maze[row][col+1]=='.'&&maze[row][col+1]=='#'){
+	    neighbors.add(new Node(row,col+1,next));
 	}
-	if(!(row+1>=maze.length||col+1>=maze[row].length||maze[row+1][col+1]=='.'||maze[row+1][col+1]=='#')){
-	    neighbors.add(new Node(row+1,col+1,next));
+	if(maze[row][col+1]=='.'&&maze[row][col+1]=='#'){
+	    neighbors.add(new Node(row,col-1,next));
 	}
 	return neighbors;
     }
@@ -205,5 +213,8 @@ public class BetterMaze{
 	}
     }
     public static void main(String[]args){
-	
+	BetterMaze t1=new BetterMaze("data1.dat");
+	t1.setAnimate(true);
+	System.out.println(t1.solveBFS());
+    }
 }

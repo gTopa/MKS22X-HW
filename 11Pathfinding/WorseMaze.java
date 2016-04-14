@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.*;
 
-public class BetterMaze{
+public class WorseMaze{
     private class Node{
 	private int x;
 	private int y;
@@ -31,55 +31,60 @@ public class BetterMaze{
     private Frontier<Node> placesToGo;
     private boolean  animate;//default to false
 
-   /**return a COPY of solution.
+    /**return a COPY of solution.
      *This should be : [x1,y1,x2,y2,x3,y3...]
      *the coordinates of the solution from start to end.
      *Precondition : one of the solveXXX methods has already been 
      * called (solveBFS OR solveDFS OR solveAStar)
      *(otherwise an empty array is returned)
      *Postcondition:  the correct solution is in the returned array
-    **/
+     **/
     public int[] solutionCoordinates(){
         /** IMPLEMENT THIS **/      
 	return new int[1];
     }    
-
-
+    
+    public static void main(String[]args) {
+	WorseMaze b = new WorseMaze("data1.dat");
+	b.setAnimate(true);
+	System.out.println(b.solveBFS());
+    }
+    
     /**initialize the frontier as a queue and call solve
-    **/
+     **/
     public boolean solveBFS(){  
 	placesToGo=new FrontierQueue<Node>();
 	return solve();
     }   
 
 
-   /**initialize the frontier as a stack and call solve
-    */ 
+    /**initialize the frontier as a stack and call solve
+     */ 
     public boolean solveDFS(){  
 	placesToGo=new FrontierStack<Node>();
 	return solve();
     }    
 
-   /**Search for the end of the maze using the frontier. 
-      Keep going until you find a solution or run out of elements on the frontier.
+    /**Search for the end of the maze using the frontier. 
+       Keep going until you find a solution or run out of elements on the frontier.
     **/
     private boolean solve(){  
 	placesToGo.add(new Node(startRow,startCol,null));
 	while(placesToGo.hasNext()){
 	    Node next=placesToGo.next();
+	    maze[next.getX()][next.getY()] = '.';
 	    startRow=next.getX();
 	    startCol=next.getY();
 	    for(Node n : getNeighbors(next)){
 		if (checkEnd(n)){
-		    solutionCoordinates();
 		    return true;
+		}else{
+		    placesToGo.add(n);
 		}
-		placesToGo.add(n);
 		if (animate){
 		    System.out.println(toString());
 		}
 	    }
-	    maze[startRow][startCol]='.';
 	}
 	return false;
     }    
@@ -107,13 +112,13 @@ public class BetterMaze{
 	return neighbors;
     }
 
-   /**mutator for the animate variable  **/
+    /**mutator for the animate variable  **/
     public void setAnimate(boolean b){ 
 	animate=b;
     }    
 
 
-    public BetterMaze(String filename){
+    public WorseMaze(String filename){
 	animate = false;
 	int maxc = 0;
 	int maxr = 0;
@@ -206,10 +211,5 @@ public class BetterMaze{
 	}else{
 	    return ans + color(37,40) + "\n";
 	}
-    }
-    public static void main(String[]args){
-	BetterMaze t1=new BetterMaze("data1.dat");
-	t1.setAnimate(true);
-	System.out.println(t1.solveDFS());
     }
 }
