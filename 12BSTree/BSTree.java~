@@ -1,0 +1,27 @@
+public class BSTree<T extends comparable<T>>{
+    private class Node{
+	T data;
+	Node left;
+	Node right;
+
+	private void setLeft(Node newL){
+	    left=newL;
+	}
+	private Node getLeft(){
+	    return left;
+	}
+	private void setRight(Node newR){
+	    right=newR;
+	}
+	private Node getRight(){
+	    return right;
+	}
+	private void setData(T newD){
+	    data=newD;
+	}
+	private T getData(){
+	    return data;
+	}
+    }
+
+}
