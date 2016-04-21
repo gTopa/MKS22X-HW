@@ -60,9 +60,9 @@ public class BSTree<T extends Comparable<T>>{
 	public boolean contains(T value, Node current){
 	    if(current==null){
 		return false;
-	    }else if(current.getValue().comareTo(value)==0){
+	    }else if(current.getData().compareTo(value)==0){
 		return true;
-	    }else if(current.getValue().comareTo(value)<0){
+	    }else if(current.getData().compareTo(value)<0){
 		return contains(value,current.getLeft());
 	    }else{
 		return contains(value,current.getRight());
@@ -72,7 +72,7 @@ public class BSTree<T extends Comparable<T>>{
 	    if (current==null){
 		return 0;
 	    }else{
-		return 1+Math.max(getheight(current.getLeft()),getHeight(current.getRight()));
+		return 1+Math.max(getHeight(current.getLeft()),getHeight(current.getRight()));
 	    }
 	}
     }
