@@ -9,6 +9,11 @@ public class BSTree<T extends Comparable<T>>{
 	public Node(T value){
 	    data=value;
 	}
+	public Node(T value, Node left, Node right){
+	    data=value;
+	    this.left=left;
+	    this.right=right;
+	}
 
 	private void setLeft(Node newL){
 	    left=newL;
@@ -29,32 +34,32 @@ public class BSTree<T extends Comparable<T>>{
 	    return data;
 	}
 
-	public void add(T value, Node current){
-	    if(value.compareTo(current.getData())<0){
-		if(current.getLeft()==null){
-		    current.setLeft(new Node(value));
+	public void add(T value){
+	    if(value.compareTo(data)<0){
+		if(left==null){
+		    left=new Node(value);
 		}
 		else{
-		    add(value,current.getLeft());
+		    left.add(value);
 		}
 	    }else{
-		if(current.getLeft()==null){
-		    current.setRight(new Node(value));
+		if(right==null){
+		    right=new Node(value);
 		}
 		else{
-		    add(value,current.getRight());
+		    right.add(value);
 		}
 	    }
 	}
-	public String toString(Node current){
-	    if(current.getLeft()==null&&current.getRight()==null){
-		return current.getData()+" _ _";
-	    }else if(current.getRight()==null){
-		return current.getData()+" "+toString(current.getLeft())+" _";
-	    }else if(current.getLeft()==null){
-		return current.getData()+" _ "+toString(current.getLeft());
+	public String toString(){
+	    if(left== null && right == null){
+		return data+" _ _";
+	    }else if(left == null){
+		return data+" _ "+right;
+	    }else if(right==null){
+		return data+" "+left+" _ ";
 	    }else{
-		return current.getData()+toString(current.getLeft())+toString(current.getRight());
+		return ""+data+" "+left+" "+right;
 	    }
 	}
 	public boolean contains(T value, Node current){
@@ -77,4 +82,32 @@ public class BSTree<T extends Comparable<T>>{
 	}
     }
 
+    private Node root;
+
+    public void add(T value){
+	if(root==null){
+	    root=new Node(value);
+	}else{
+	    root.add(value);
+	}
+    }
+    public String toString(){
+	return root.toString();
+    }
+
+    public static void main(String[]args){
+	BSTree<Integer> twee=new BSTree<Integer>();
+	twee.add(3);
+	twee.add(5);
+	twee.add(-1);
+	twee.add(24);
+	twee.add(13);
+	twee.add(9);
+	twee.add(12);
+	twee.add(54);
+	twee.add(66);
+	twee.add(-45);
+	twee.add(6);
+	System.out.println(twee.toString());
+    }
 }
