@@ -62,15 +62,15 @@ public class BSTree<T extends Comparable<T>>{
 		return ""+data+" "+left+" "+right;
 	    }
 	}
-	public boolean contains(T value, Node current){
-	    if(current==null){
+	public boolean contains(T value){
+	    if(this==null){
 		return false;
-	    }else if(current.getData().compareTo(value)==0){
+	    }else if(data.compareTo(value)==0){
 		return true;
-	    }else if(current.getData().compareTo(value)<0){
-		return contains(value,current.getLeft());
+	    }else if(data.compareTo(value)<0){
+		return left.contains(value);
 	    }else{
-		return contains(value,current.getRight());
+		return right.contains(value);
 	    }
 	}
 	public int getHeight(Node current){
@@ -80,6 +80,12 @@ public class BSTree<T extends Comparable<T>>{
 		return 1+Math.max(getHeight(current.getLeft()),getHeight(current.getRight()));
 	    }
 	}
+
+	public void remove(T value){
+	    
+	}
+    }
+
     }
 
     private Node root;
@@ -95,6 +101,27 @@ public class BSTree<T extends Comparable<T>>{
 	return root.toString();
     }
 
+    public boolean contains(T value){
+	return root.contains(value);
+    }
+
+    public int getHeight(){
+	return root.getHeight();
+    }
+
+    public void remove(T value){
+	if (root.contains(value)){
+	    if(data.compareTo(value)==0){
+		if (left==null){
+		    data=right.remove(right.min());
+		}else{
+		    data=left.remove(left.mac());
+		}
+	    }else if(data.compareTo(value)<0){
+		
+	}
+    }
+    
     public static void main(String[]args){
 	BSTree<Integer> twee=new BSTree<Integer>();
 	twee.add(3);
