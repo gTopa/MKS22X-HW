@@ -82,10 +82,9 @@ public class BSTree<T extends Comparable<T>>{
 	}
 
 	public void remove(T value){
-	    
+	    if (data.compareTo(value)==0){
+	    }
 	}
-    }
-
     }
 
     private Node root;
@@ -111,14 +110,11 @@ public class BSTree<T extends Comparable<T>>{
 
     public void remove(T value){
 	if (root.contains(value)){
-	    if(data.compareTo(value)==0){
-		if (left==null){
-		    data=right.remove(right.min());
-		}else{
-		    data=left.remove(left.mac());
-		}
-	    }else if(data.compareTo(value)<0){
-		
+	    if(right==null&&left==null){
+		root=null;
+	    }else{
+		return root.remove(value);
+	    }
 	}
     }
     
