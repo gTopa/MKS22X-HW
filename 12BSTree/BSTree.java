@@ -81,12 +81,7 @@ public class BSTree<T extends Comparable<T>>{
 	    }
 	}
 
-	public void remove(T value){
-	    if (data.compareTo(value)==0){
-	    }
-	}
     }
-
     private Node root;
 
     public void add(T value){
@@ -94,6 +89,7 @@ public class BSTree<T extends Comparable<T>>{
 	    root=new Node(value);
 	}else{
 	    root.add(value);
+
 	}
     }
     public String toString(){
@@ -105,32 +101,14 @@ public class BSTree<T extends Comparable<T>>{
     }
 
     public int getHeight(){
-	return root.getHeight();
+	return root.getHeight(root);
     }
 
-    public void remove(T value){
-	if (root.contains(value)){
-	    if(right==null&&left==null){
-		root=null;
-	    }else{
-		return root.remove(value);
-	    }
-	}
-    }
-    
     public static void main(String[]args){
 	BSTree<Integer> twee=new BSTree<Integer>();
 	twee.add(3);
-	twee.add(5);
-	twee.add(-1);
-	twee.add(24);
-	twee.add(13);
-	twee.add(9);
-	twee.add(12);
-	twee.add(54);
-	twee.add(66);
-	twee.add(-45);
-	twee.add(6);
 	System.out.println(twee.toString());
+	twee.add(4);
+	System.out.println(twee.getHeight());
     }
 }
