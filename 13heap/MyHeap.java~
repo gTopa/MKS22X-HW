@@ -1,0 +1,46 @@
+pulbic class MyHeap<T extends Comparable<T>>{
+    private T[] heap;
+    private boolean isMax;
+    private int size;
+    
+    public MyHeap(){
+	heap=new T[];
+	isMax=true;
+	size=0;
+    }
+
+    public MyHeap(boolean max){
+	heap=new T[];
+	isMax=max;
+	size=0;
+    }
+
+    public T remove(){
+
+    }
+
+    public void add(T value){
+	if (size+1=heap.length){
+	    resize();
+	}
+	size++;
+	heap[size]=value;
+	pushUp(size);
+    }
+
+    private void pushUp(int pos){
+	for(int i=pos;pos>0;pos--){
+	}
+    }
+    
+    public T peek(){
+	return heap[1];
+    }
+    
+    public boolean compare(T first, T second){
+	if(iSMax){
+	    return first.compareTo(second)>0;
+	}else{
+	    return second.compareTo(first)>0;
+	}
+    }
