@@ -1,26 +1,26 @@
 import java.util.*;
 @SuppressWarnings("unchecked")
-pulbic class MyHeap<T extends Comparable<T>>{
+
+public class MyHeap<T extends Comparable<T>>{
     private T[] heap;
     private boolean isMax;
     private int size;
     
     public MyHeap(){
-	heap=(T)new Comparable[];
+	heap=(T)new Comparable[10];
 	isMax=true;
 	size=0;
     }
 
     public MyHeap(boolean max){
-	heap=(T)new Comparable[];
+	heap=(T)new Comparable[10];
 	isMax=max;
 	size=0;
     }
 
     public T remove(){
-	heap[1]=heap[size];
+	pushDown(1);
 	size--;
-	
     }
 
     public void add(T value){
@@ -29,18 +29,19 @@ pulbic class MyHeap<T extends Comparable<T>>{
 	}
 	size++;
 	heap[size]=value;
-	int pos=size;
-	while(pos>1&&compare(heap[pos],heap[pos/2])){
-	    pushUp(pos);
-	    pos=pos/2;
-	}
+	pushUp(size);
+    }
+
+    private void resize(){
+
     }
 
     private void pushUp(int pos){
-	if(compare(heap[pos],heap[pos/2])){
+	if(pos>1&&compare(heap[pos],heap[pos/2])){
 	    T temp=heap[pos/2];
 	    heap[pos/2]=heap[pos];
 	    heap[pos]=temp;
+	    pushUp(pos/2);
 	}
     }
 
@@ -49,10 +50,16 @@ pulbic class MyHeap<T extends Comparable<T>>{
 	    T temp=heap[pos*2];
 	    heap[pos*2]=heap[pos];
 	    heap[pos]=temp;
+	    if (pos*2<=size){
+		pushDown(pos*2);
+	    }
 	}else{
 	    T temp=heap[pos*2+1];
 	    heap[pos*2+1]=heap[pos];
 	    heap[pos]=temp;
+	    if (pos*2+1<=size){
+		pushDown(pos*2+1);
+	    }
 	}
     }
 
@@ -61,9 +68,10 @@ pulbic class MyHeap<T extends Comparable<T>>{
     }
     
     public boolean compare(T first, T second){
-	if(iSMax){
+	if(isMax){
 	    return first.compareTo(second)>0;
 	}else{
 	    return second.compareTo(first)>0;
 	}
     }
+}
