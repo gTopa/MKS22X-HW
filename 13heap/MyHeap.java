@@ -25,7 +25,7 @@ public class MyHeap<T extends Comparable<T>>{
 	for(int i=1;i<=size;i++){
 	    heap[i]=array[i-1];
 	}
-	for(int i=size;i>0;i--){
+	for(int i=size/2;i>0;i--){
 	    pushDown(i);
 	}
     }
@@ -37,12 +37,15 @@ public class MyHeap<T extends Comparable<T>>{
 	for(int i=1;i<=size;i++){
 	    heap[i]=array[i-1];
 	}
-	for(int i=size;i>0;i--){
+	for(int i=size/2;i>0;i--){
 	    pushDown(i);
 	}
     }
     
     public T remove(){
+	if(size==0){
+	    throw new NoSuchElementException();
+	}
 	T temp=heap[1];
 	heap[1]=heap[size];
 	size--;
@@ -77,27 +80,31 @@ public class MyHeap<T extends Comparable<T>>{
     }
 
     private void pushDown(int pos){
-	try{
-	    if(heap[pos*2+1]==null||compare(heap[pos*2],heap[pos*2+1])){
+	if(pos*2+1<=size){
+	    if(compare(heap[pos*2],heap[pos*2+1])){
 		T temp=heap[pos*2];
 		heap[pos*2]=heap[pos];
 		heap[pos]=temp;
-		if (pos*2<=size){
-		    pushDown(pos*2);
-		}
+		pushDown(pos*2);
 	    }else{
 		T temp=heap[pos*2+1];
 		heap[pos*2+1]=heap[pos];
 		heap[pos]=temp;
-		if (pos*2+1<=size){
-		    pushDown(pos*2+1);
-		}
+		pushDown(pos*2+1);
 	    }
-	}catch(IndexOutOfBoundsException e){
+	}else{
+	    if(pos*2<=size){
+		T temp=heap[pos*2];
+		heap[pos*2]=heap[pos];
+		heap[pos]=temp;
+	    }
 	}
     }
 
     public T peek(){
+	if(size==0){
+	    throw new NoSuchElementException();
+	}
 	return heap[1];
     }
     
@@ -117,5 +124,23 @@ public class MyHeap<T extends Comparable<T>>{
 	return temp;
 	//return Arrays.toString(heap);
     }
-    
+    public static void main(String[]args){
+	MyHeap<Integer> t1=new MyHeap<Integer>();
+	t1.add(1);
+	t1.add(3);
+	t1.add(-12);
+	t1.add(31);
+	t1.add(13);
+	System.out.println(t1);
+	System.out.println(t1.size);
+	t1.remove();
+	System.out.println(t1.size);
+	System.out.println(t1);
+	t1.remove();
+	System.out.println(t1.size);
+	System.out.println(t1);
+	t1.remove();
+	System.out.println(t1.size);
+	System.out.println(t1);
+    }
 }
