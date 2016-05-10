@@ -82,21 +82,27 @@ public class MyHeap<T extends Comparable<T>>{
     private void pushDown(int pos){
 	if(pos*2+1<=size){
 	    if(compare(heap[pos*2],heap[pos*2+1])){
-		T temp=heap[pos*2];
-		heap[pos*2]=heap[pos];
-		heap[pos]=temp;
-		pushDown(pos*2);
+		if(compare(heap[pos*2],heap[pos])){
+		    T temp=heap[pos*2];
+		    heap[pos*2]=heap[pos];
+		    heap[pos]=temp;
+		    pushDown(pos*2);
+		}
 	    }else{
-		T temp=heap[pos*2+1];
-		heap[pos*2+1]=heap[pos];
-		heap[pos]=temp;
-		pushDown(pos*2+1);
+		if(compare(heap[pos*2+1],heap[pos])){
+		    T temp=heap[pos*2+1];
+		    heap[pos*2+1]=heap[pos];
+		    heap[pos]=temp;
+		    pushDown(pos*2+1);
+		}
 	    }
 	}else{
-	    if(pos*2<=size){
-		T temp=heap[pos*2];
-		heap[pos*2]=heap[pos];
-		heap[pos]=temp;
+	    if(pos*2==size){
+		if(compare(heap[pos*2],heap[pos])){
+		    T temp=heap[pos*2];
+		    heap[pos*2]=heap[pos];
+		    heap[pos]=temp;
+		}
 	    }
 	}
     }
@@ -131,16 +137,9 @@ public class MyHeap<T extends Comparable<T>>{
 	t1.add(-12);
 	t1.add(31);
 	t1.add(13);
-	System.out.println(t1);
-	System.out.println(t1.size);
 	t1.remove();
-	System.out.println(t1.size);
-	System.out.println(t1);
 	t1.remove();
-	System.out.println(t1.size);
-	System.out.println(t1);
 	t1.remove();
-	System.out.println(t1.size);
 	System.out.println(t1);
     }
 }
