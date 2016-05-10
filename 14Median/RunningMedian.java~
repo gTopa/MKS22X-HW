@@ -1,0 +1,26 @@
+public class RunningMedian{
+    private MyHeap<Integer> min;
+    private MyHeap<Integer> max;
+
+    public RunningMedian(){
+	min=new MyHeap<Integer>();
+	max=new MyHeap<Integer>(false);
+    }
+
+    public double getMedian(){
+	if (min.getSize()==max.getSize()){
+	    return (min.peek()+max.peek())/2;
+	}else if(min.getSize()>max.getSize()){
+	    return min.peek();
+	}else{
+	    return max.peek();
+	}
+    }
+
+    public void add(Integer x){
+
+    }
+
+    private void balance(){
+
+    }
